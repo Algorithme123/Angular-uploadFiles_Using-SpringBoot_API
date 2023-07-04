@@ -1,9 +1,39 @@
-<div>
-  <h2>Upload File</h2>
-  <input type="file" (change)="onFileSelected($event)">
-  <button (click)="onUpload()">Upload</button>
+
+<div *ngIf="formulaire ==true">
+  <button (click)="changerb()">changer</button>
+
+  <div>
+    <h2>Upload File</h2>
+    <input type="file" (change)="onFileSelected($event)">
+    <button (click)="onUpload()">Upload</button>
+  </div>
+
+
+  <div *ngIf="fileUploadResponse">
+    <p>File Name: {{ fileUploadResponse.fileName }}</p>
+    <p>Message: {{ fileUploadResponse.message }}</p>
+    <img *ngIf="fileUploadResponse.fileName" [src]="getImageUrl(fileUploadResponse.fileName)" alt="Uploaded Image">
+  </div>
+
 </div>
-<div *ngIf="fileUploadResponse">
-  <p>File Name: {{ fileUploadResponse.fileName }}</p>
-  <p>Message: {{ fileUploadResponse.message }}</p>
+<div *ngIf="formulaire ==false">
+
+
+
+  <div>
+    <h2>Image Gallery</h2>
+
+
+    <div *ngFor="let imageName of imageNames">
+      <img [src]="'http://localhost/image/images/' + imageName" alt="Image">
+    </div>
+
+
+
+   <!--
+  <div *ngFor="let imageName of imageNames">
+    <img [src]="getImageUrl(imageName)" alt="Image">
+  </div>
+  -->
+  </div>
 </div>
